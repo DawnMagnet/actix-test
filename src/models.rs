@@ -1,5 +1,6 @@
 use chrono::NaiveDateTime;
-
+use serde::{Deserialize, Serialize};
+use crate::prelude::int2version;
 #[derive(Queryable, Debug, Clone)]
 pub struct Version {
     pub id: i32,
@@ -17,21 +18,11 @@ pub struct Version {
     pub pop_count : Option<i32>,
     pub install_count : Option<i32>,
     pub aid : Option<i32>,
-    // 存疑
     pub create_time : NaiveDateTime,
     pub delete_time : Option<NaiveDateTime>,
-    pub is_delete : Option<bool>,
-    pub is_release : Option<bool>,
+    pub is_delete : bool,
+    pub is_release : bool,
 }
-
-#[derive(Queryable)]
-pub struct VersionMessage {
-
-}
-
-use serde::{Deserialize, Serialize};
-use crate::prelude::int2version;
-
 #[derive(Deserialize, Debug)]
 pub struct ConfInCome {
 
@@ -45,19 +36,6 @@ pub struct ConfOutCome {
 impl ConfOutCome {
     pub fn test_data() -> Self {
         ConfOutCome {
-            // platform: "Android".to_string(),
-            // download_url: "www.baidu.com".to_string(),
-            // update_version_code: "6.1.2".to_string(),
-            // md5: "expand".to_string(),
-            // device_id_list: "[1,2,3]".to_string(),
-            // max_update_version_code: "6.1.4".to_string(),
-            // min_update_version_code: "6.1.0".to_string(),
-            // max_os_api: 6,
-            // min_os_api: 14,
-            // cpu_arch: "aarch64".to_string(),
-            // channel: "unknown".to_string(),
-            // title: "good".to_string(),
-            // update_tips: "none".to_string(),
         }
     }
 }
@@ -97,8 +75,8 @@ impl VersionVO {
         one_vo.download_url = i.download_url.unwrap_or(String::new());
         one_vo.max_version = int2version(i.max_version);
         one_vo.min_version = int2version(i.min_version);
-        one_vo.is_delete = i.is_delete.unwrap_or(false).to_string();
-        one_vo.is_release = i.is_release.unwrap_or(false).to_string();
+        one_vo.is_delete = i.is_delete.to_string();
+        one_vo.is_release = i.is_release.to_string();
         one_vo.platform = i.platform.unwrap_or(String::new());
         one_vo.channel = i.channel.unwrap_or(String::new());
         one_vo.max_os_api = i.max_os_api.to_string();

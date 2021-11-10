@@ -2,6 +2,7 @@
 extern crate diesel;
 pub mod curd;
 pub mod schema;
+pub mod schema2;
 pub mod models;
 pub mod to_user;
 pub mod to_admin;
@@ -11,12 +12,13 @@ pub mod prelude {
 
     pub use actix_web::{get, post, web, App, HttpRequest, HttpServer, HttpResponse, Responder};
     pub use diesel::{Connection, MysqlConnection};
-    pub use crate::{curd, schema, models, to_user, to_admin};
+    pub use crate::{curd, schema, schema2, models, to_user, to_admin};
     pub use anyhow::Result;
     pub use crate::curd::*;
     pub use crate::models::*;
     pub use crate::dataio::*;
     pub use crate::schema::*;
+    pub use crate::schema2::*;
     pub use crate::schema::version::dsl::*;
     pub use diesel::prelude::*;
 

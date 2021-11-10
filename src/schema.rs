@@ -1,4 +1,3 @@
-
 table! {
     version (id) {
         id -> Integer,
@@ -19,24 +18,8 @@ table! {
         aid -> Nullable<Integer>,
         create_time -> Datetime,
         delete_time -> Nullable<Datetime>,
-        is_delete -> Nullable<Bool>,
-        is_release -> Nullable<Bool>,
+        is_delete -> Bool,
+        is_release -> Bool,
     }
 }
 
-table! {
-    version_message (id) {
-        id -> Integer,
-        bid -> Nullable<Char>,
-        version_bid -> Nullable<Char>,
-        user_bid -> Nullable<Char>,
-        operation -> Nullable<Integer>,
-        content -> Nullable<Varchar>,
-        create_time -> Nullable<Datetime>,
-    }
-}
-
-allow_tables_to_appear_in_same_query!(
-    version,
-    version_message,
-);

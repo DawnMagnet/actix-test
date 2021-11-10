@@ -60,3 +60,11 @@ pub struct CheckUpdateInput {
 pub struct DownloadCountInput {
     pub bid: String
 }
+
+#[derive(Deserialize)]
+pub struct RulesOpenInput {
+    pub bid: String
+}
+
+pub type RulesDeleteInput = RulesOpenInput;
+pub type RulesCloseInput = RulesOpenInput;
