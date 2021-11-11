@@ -2,6 +2,7 @@ use crate::prelude::*;
 
 #[get("/checkUpdate")]
 pub async fn check_update(req_body: web::Json<CheckUpdateInput>, db_conn: web::Data<MysqlConnection>) -> impl Responder {
+    pub use crate::prelude::version::dsl::*;
     let input = req_body.into_inner();
     let update_version_code = version2int(&input.version);
     let version_query = version
@@ -29,6 +30,7 @@ pub async fn check_update(req_body: web::Json<CheckUpdateInput>, db_conn: web::D
 
 #[get("/downloadCount")]
 pub async fn download_count(req_body: web::Json<DownloadCountInput>, db_conn: web::Data<MysqlConnection>) -> impl Responder {
+    pub use crate::prelude::version::dsl::*;
     let input = req_body.into_inner();
     let rule = version
         .filter(bid.eq(input.bid.clone()))

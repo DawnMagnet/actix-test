@@ -3,6 +3,7 @@ use crate::prelude::*;
 
 #[get("/getVersionByCondition")]
 pub async fn get_version_by_condition(json: web::Json<GetVersionByConditionInput>, db_conn: web::Data<MysqlConnection>) -> impl Responder {
+    pub use crate::prelude::version::dsl::*;
     let input = json.into_inner();
     if !AVAILABLE_PLATFORM.contains(&input.platform.as_str()) {
         return error(42004, "Platform is error !");
@@ -53,6 +54,7 @@ pub async fn get_version_by_condition(json: web::Json<GetVersionByConditionInput
 
 #[get("/getVersions")]
 pub async fn get_versions(json: web::Json<GetVersionInput>, db_conn: web::Data<MysqlConnection>) -> impl Responder {
+    pub use crate::prelude::version::dsl::*;
     let input = json.into_inner();
     let version_vec: Vec<Version> = version
         .offset(input.page.unwrap_or(1) as i64)
